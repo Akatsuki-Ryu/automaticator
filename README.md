@@ -10,9 +10,11 @@ A version of this application is available at [https://automaticator.herokuapp.c
 
 ## Running
 
-### Install required packages from NPM:
+### Install required packages from NPM and Bower:
 
     npm install
+
+This will also grab frontend packages needed from bower and put them in `public/bower_components`
 
 ### Configure your client id and client secret
 
@@ -20,7 +22,7 @@ Copy the file `config-sample.json` to `config.json` and add your Automatic clien
 
 ### Run the app
 
-    DEBUG=automaticator npm start
+    npm start
 
 ### View the app
 
@@ -30,11 +32,11 @@ Open `localhost:3000` in your browser.
 
 You can test locally as a logged in user, bypassing oAuth by including an `TOKEN` and `USER_ID` when running the app.
 
-    DEBUG=automaticator USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> npm start
+    USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> npm start
 
-### Deploy to Heroku
+## Deploying
 
-If you have the heroku toolbelt installed, you can create, configure and deploy this app to Heroku.  To create an app:
+If you have the [heroku toolbelt](https://toolbelt.heroku.com/) installed, you can create, configure and deploy this app to Heroku.  To create an app:
 
     heroku create
 
@@ -48,6 +50,7 @@ Configure the heroku app's environment variables:
     heroku config:add AUTOMATIC_CLIENT_SECRET=<YOUR AUTOMATIC CLIENT SECRET>
     heroku config:add AUTOMATIC_AUTHORIZE_URL=https://www.automatic.com/oauth/authorize/
     heroku config:add AUTOMATIC_AUTH_TOKEN_URL=https://www.automatic.com/oauth/access_token/
+    heroku config:add SESSION_SECRET=<YOUR SESSION SECRET>
 
 Deploy your app to heroku:
 

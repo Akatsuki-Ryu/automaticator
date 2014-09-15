@@ -1,0 +1,23 @@
+{
+  "name": "automaticator",
+  "version": "0.3.0",
+  "homepage": "https://github.com/Automatic/automaticator",
+  "authors": [
+    "Brendan Nee <brendan@automatic.com>"
+  ],
+  "description": "Automatic API Webhook Demo Application",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.8.3",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0",
+    "mapbox.js": "~1.6.4"
+  }
+}
