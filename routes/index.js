@@ -1,19 +1,20 @@
 exports.index = function(req, res) {
   if(process.env.TOKEN) {
     req.session.access_token = process.env.TOKEN;
+    req.session.user_id = process.env.USER_ID;
   }
 
   if(req.session && req.session.access_token) {
-    res.sendfile('public/map.html');
+    res.render('map');
   } else {
-    res.sendfile('public/signin.html');
+    res.render('signin');
   }
 }
 
 
 exports.logs = function(req, res) {
   if(req.session && req.session.access_token) {
-    res.sendfile('public/logs.html');
+    res.render('logs');
   } else {
     res.redirect('/');
   }

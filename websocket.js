@@ -1,11 +1,10 @@
 var _ = require('underscore');
-var express = require('express');
-var db = require('./database');
+var cookieParser = require('cookie-parser');
 var nconf = require('nconf');
 
 nconf.env().argv();
 nconf.file('./config.json');
-var parseCookie = express.cookieParser(nconf.get('SESSION_SECRET'));
+var parseCookie = cookieParser(nconf.get('SESSION_SECRET'));
 
 
 exports.setup = function(app) {
@@ -15,7 +14,7 @@ exports.setup = function(app) {
     client.send(JSON.stringify({msg: "Socket Opened"}));
     parseCookie(client.upgradeReq, null, function(err) {
         var sessionID = client.upgradeReq.signedCookies['connect.sid'];
-        var store = app.get('store')
+        var store = app.get('store');
         store.get(sessionID, function(e, session) {
           client.user_id = session.user_id;
         });
@@ -32,15 +31,5 @@ exports.setup = function(app) {
         client.send(JSON.stringify(data));
       });
     }
-  }
-
-
-  app.post('/webhook/', function(req, res) {
-    console.log('>>>>>>> Incoming Webhook: ' + JSON.stringify(req.body));
-    if(req.body) {
-      wss.sendEvent(req.body);
-      db.saveLog(req.body);
-      res.json({success: true});
-    }
-  });
-}
+  };
+};

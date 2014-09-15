@@ -28,9 +28,9 @@ Open `localhost:3000` in your browser.
 
 ### Testing locally, skipping oAuth
 
-You can test locally as a logged in user, bypassing oAuth by including an `access_token` when running the app.
+You can test locally as a logged in user, bypassing oAuth by including an `TOKEN` and `USER_ID` when running the app.
 
-    DEBUG=automaticator TOKEN=YOUR-AUTOMATIC-ACCESS-TOKEN npm start
+    DEBUG=automaticator USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> npm start
 
 ### Deploy to Heroku
 
@@ -44,8 +44,8 @@ If you already created an app, add it as a git remote:
 
 Configure the heroku app's environment variables:
 
-    heroku config:add AUTOMATIC_CLIENT_ID="YOUR AUTOMATIC CLIENT ID"
-    heroku config:add AUTOMATIC_CLIENT_SECRET="YOUR AUTOMATIC CLIENT SECRET"
+    heroku config:add AUTOMATIC_CLIENT_ID=<YOUR AUTOMATIC CLIENT ID>
+    heroku config:add AUTOMATIC_CLIENT_SECRET=<YOUR AUTOMATIC CLIENT SECRET>
     heroku config:add AUTOMATIC_AUTHORIZE_URL=https://www.automatic.com/oauth/authorize/
     heroku config:add AUTOMATIC_AUTH_TOKEN_URL=https://www.automatic.com/oauth/access_token/
 

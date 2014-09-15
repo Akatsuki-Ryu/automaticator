@@ -3,5 +3,6 @@
   "AUTOMATIC_CLIENT_SECRET": "YOUR AUTOMATIC CLIENT SECRET",
   "AUTOMATIC_AUTHORIZE_URL": "https://www.automatic.com/oauth/authorize/",
   "AUTOMATIC_AUTH_TOKEN_URL": "https://www.automatic.com/oauth/access_token/",
-  "AUTOMATIC_SCOPES": "scope:trip:summary scope:location scope:vehicle scope:notification:hard_accel scope:notification:hard_brake scope:notification:speeding scope:mil:on scope:mil:off"
+  "AUTOMATIC_SCOPES": "scope:trip:summary scope:location scope:vehicle scope:notification:hard_accel scope:notification:hard_brake scope:notification:speeding scope:mil:on scope:mil:off",
+  "SESSION_SECRET": "MAKETHISAGOODSECRET"
 }
