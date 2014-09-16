@@ -9,7 +9,7 @@ exports.index = function(req, res) {
   } else {
     res.render('signin');
   }
-}
+};
 
 
 exports.logs = function(req, res) {
@@ -18,7 +18,16 @@ exports.logs = function(req, res) {
   } else {
     res.redirect('/');
   }
-}
+};
+
+
+exports.simulate = function(req, res) {
+  if(req.session && req.session.access_token) {
+    res.render('simulate');
+  } else {
+    res.redirect('/');
+  }
+};
 
 
 exports.force_https = function(req, res, next) {
@@ -27,4 +36,4 @@ exports.force_https = function(req, res, next) {
   } else {
     next();
   }
-}
+};

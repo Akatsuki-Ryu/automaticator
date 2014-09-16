@@ -5,7 +5,7 @@ $(function() {
 });
 
 function formatItem(item) {
-  var data = {id: item.id}
+  var data = {};
 
   if(item.trip) {
     data.trip = item.trip;
@@ -28,7 +28,7 @@ function formatItem(item) {
 
   var row = []
 
-  row.push(moment(item.created_at).format('YYYY-MM-DD H:MM A'));
+  row.push(moment(item.created_at).format('h:MM A, MMM D, YYYY'));
   row.push(item.type);
   row.push(item.vehicle.display_name);
   row.push('<a href="https://www.google.com/maps/place/' + item.location.lat + ',' + item.location.lon + '" target="_blank">map</a>');

@@ -28,15 +28,10 @@ body {
   color: #666;
   margin-bottom: 15px;
 }
+
 nav {
   float: right;
   width: 400px;
-}
-
-#simulate {
-  position: absolute;
-  top: 45px;
-  right: 20px;
 }
 
 #logout {
@@ -69,6 +64,10 @@ nav {
   vertical-align: middle;
   margin-right: 5px;
   background: url(/images/automatic-logo.png) 0 0 no-repeat;
+}
+
+#content {
+  clear: both;
 }
 
 #map-wrapper {

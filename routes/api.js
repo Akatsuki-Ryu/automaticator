@@ -8,4 +8,4 @@ exports.logs = function(req, res) {
   } else {
     res.json({error: 'Not logged in'});
   }
-}
+};

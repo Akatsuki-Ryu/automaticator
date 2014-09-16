@@ -9,6 +9,7 @@ var session = require('express-session');
 var memoryStore = session.MemoryStore;
 var store = new memoryStore();
 var db = require('./database');
+var helpers = require('./routes/helpers');
 
 var nconf = require('nconf');
 
@@ -48,6 +49,18 @@ if (app.get('env') !== 'development') {
 app.get('/', routes.index);
 app.get('/logs/', routes.logs);
 app.get('/logs/api/', api.logs);
+
+app.get('/simulate/', routes.simulate);
+app.post('/simulate/api/', function(req, res) {
+  if(req.session.user_id && req.body.eventType) {
+    var event = helpers.generateEvent(req.session.user_id, req.body.eventType);
+    var wss = app.get('wss');
+    wss.sendEvent(event);
+    res.json({success: true});
+  } else {
+    res.json({error: 'Not logged in'});
+  }
+});
 
 app.get('/authorize/', oauth.authorize);
 app.get('/logout/', oauth.logout);
