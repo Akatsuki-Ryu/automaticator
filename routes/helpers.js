@@ -16,7 +16,7 @@ exports.generateEvent = function(user_id, eventType) {
     },
     location: randomLocation(),
     created_at: new Date().valueOf(),
-    vehicle: {"id":"C_40ed9887baf98ffd","year":2014,"make":"Subaru","model":"Outback","display_name":"Outback ","color":"#3782e7"}
+    vehicle: {'id':'C_40ed9887baf98ffd','year':2014,'make':'Subaru','model':'Outback','display_name':'Outback ','color':'#3782e7'}
   };
 
   if(eventType == 'notification:hard_brake') {
@@ -38,18 +38,18 @@ exports.generateEvent = function(user_id, eventType) {
     event.type = 'mil:on';
     event.dtcs = [
       {
-        "code": "P0442",
-        "description": "Small fuel vapor leak in EVAP system",
-        "start": 1383448450301
+        'code': 'P0442',
+        'description': 'Small fuel vapor leak in EVAP system',
+        'start': 1383448450301
       }
     ];
   } else if(eventType == 'mil:off') {
     event.type = 'mil:off';
     event.dtcs = [
       {
-        "code": "P0442",
-        "description": "Small fuel vapor leak in EVAP system",
-        "start": 1383448450301
+        'code': 'P0442',
+        'description': 'Small fuel vapor leak in EVAP system',
+        'start': 1383448450301
       }
     ];
   }

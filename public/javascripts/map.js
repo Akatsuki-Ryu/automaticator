@@ -19,7 +19,7 @@ var map = L.mapbox.map('map', 'automatic.h5kpm228', {maxZoom: 16}).setView([37.9
 var ws = new WebSocket((window.document.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.document.location.host);
 ws.onopen = function () {
   $('#alert')
-    .html("<b>Connected:</b> Waiting for events")
+    .html('<b>Connected:</b> Waiting for events')
     .removeClass()
     .addClass('alert alert-info');
 }
@@ -103,7 +103,7 @@ function addMarker(lat, lon, title, description) {
 
 function updateAlert(type, message) {
   $('#alert')
-    .html("<b>" + type + ":</b> " + message)
+    .html('<b>' + type + ':</b> ' + message)
     .removeClass()
     .addClass('alert alert-success');
 }

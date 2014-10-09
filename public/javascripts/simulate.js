@@ -3,12 +3,12 @@ $('#simulate').submit(function(e) {
   $.post('/simulate/api/', {eventType: eventType}, function(response) {
     if(response.success) {
       $('#alert')
-        .html("Webhook Simulated")
+        .html('Webhook Simulated')
         .removeClass()
         .addClass('alert alert-info');
     } else {
       $('#alert')
-        .html("Error is simulating webhook")
+        .html('Error is simulating webhook')
         .removeClass()
         .addClass('alert alert-danger');
     }

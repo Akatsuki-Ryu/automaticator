@@ -11,7 +11,7 @@ exports.setup = function(app) {
   var wss = app.get('wss');
 
   wss.on('connection', function(client) {
-    client.send(JSON.stringify({msg: "Socket Opened"}));
+    client.send(JSON.stringify({msg: 'Socket Opened'}));
     parseCookie(client.upgradeReq, null, function(err) {
         var sessionID = client.upgradeReq.signedCookies['connect.sid'];
         var store = app.get('store');
