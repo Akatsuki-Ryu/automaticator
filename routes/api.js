@@ -6,6 +6,6 @@ exports.logs = function(req, res) {
       res.json(docs);
     });
   } else {
-    res.json({error: 'Not logged in'});
+    res.send(401, {error: 'not logged in'});
   }
 };

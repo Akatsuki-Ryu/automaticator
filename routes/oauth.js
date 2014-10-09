@@ -39,7 +39,7 @@ exports.redirect = function(req, res) {
       res.redirect('/');
     } catch(e) {
       console.log(e);
-      res.json({error: 'No access token'});
+      res.send(401, {error: 'No access token'});
     }
   }
 };
