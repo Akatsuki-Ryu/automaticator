@@ -1,6 +1,6 @@
 {
   "name": "automaticator",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/Automatic/automaticator",
   "authors": [
     "Brendan Nee <brendan@automatic.com>"
@@ -10,14 +10,13 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
-    "moment": "~2.8.3",
-    "jquery": "~2.1.1",
     "bootstrap": "~3.2.0",
-    "mapbox.js": "~1.6.4"
+    "jquery": "~2.1.1",
+    "Leaflet.encoded": "~0.0.4",
+    "mapbox.js": "~1.6.4",
+    "moment": "~2.8.3"
   }
 }

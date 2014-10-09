@@ -22,7 +22,7 @@ Copy the file `config-sample.json` to `config.json` and add your Automatic clien
 
 ### Run the app
 
-    npm start
+    gulp server
 
 ### View the app
 
@@ -32,7 +32,7 @@ Open `localhost:3000` in your browser.
 
 You can test locally as a logged in user, bypassing oAuth by including an `TOKEN` and `USER_ID` when running the app.
 
-    USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> npm start
+    USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> gulp server
 
 ## Deploying
 
@@ -56,13 +56,13 @@ Deploy your app to heroku:
 
     git push heroku master
 
-See [deploying a node.js app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-your-application-to-heroku) for more information.
+See [deploying a node.js app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction) for more information.
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Automatic Inc
+Copyright (c) 2014 Automatic Inc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
