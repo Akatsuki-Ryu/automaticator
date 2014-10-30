@@ -14,11 +14,12 @@ body {
 .titlebar {
   width: 300px;
   float: left;
+  margin-left: 30px;
 }
 
 .titlebar h1 {
   margin-top: 0;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   letter-spacing: 3px;
   font-size: 44px;
   font-weight: bold;
@@ -26,7 +27,15 @@ body {
 
 .tagline {
   color: #666;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+#topmenu {
+  margin-right: 15px;
+}
+
+.simulate h4 {
+  margin-top: 0;
 }
 
 nav {

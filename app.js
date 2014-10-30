@@ -50,12 +50,10 @@ app.get('/', routes.index);
 app.get('/logs/', routes.logs);
 app.get('/logs/api/', api.logs);
 
-app.get('/simulate/', routes.simulate);
 app.post('/simulate/api/', function(req, res) {
   if(req.session.user_id && req.body.eventType) {
     var event = helpers.generateEvent(req.session.user_id, req.body.eventType);
-    var wss = app.get('wss');
-    wss.sendEvent(event);
+    sendEvent(event);
     res.json({success: true});
   } else {
     res.json({error: 'Not logged in'});
@@ -75,6 +73,12 @@ app.post('/webhook/', function(req, res) {
     res.json({success: true});
   }
 });
+
+
+function sendEvent(event) {
+  var wss = app.get('wss');
+  wss.sendEvent(event);
+}
 
 
 /// catch 404 and forwarding to error handler
