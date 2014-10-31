@@ -173,3 +173,22 @@ nav {
 #logs tr td:last-child {
   max-width: 600px;
 }
+
+.driveEvent-popup .leaflet-popup-content-wrapper {
+  background: rgba(66, 73, 79, 0.88);
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+}
+.driveEvent-popup .leaflet-popup-content-wrapper a {
+  color: rgba(255,255,255,0.5);
+}
+.driveEvent-popup .leaflet-popup-tip-container {
+  width: 30px;
+  height: 15px;
+}
+.driveEvent-popup .leaflet-popup-tip {
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid rgba(66, 73, 79, 0.88);
+}

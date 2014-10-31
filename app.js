@@ -10,6 +10,7 @@ var memoryStore = session.MemoryStore;
 var store = new memoryStore();
 var db = require('./database');
 var helpers = require('./routes/helpers');
+var async = require('async');
 
 var nconf = require('nconf');
 
@@ -52,8 +53,17 @@ app.get('/logs/api/', api.logs);
 
 app.post('/simulate/api/', function(req, res) {
   if(req.session.user_id && req.body.eventType) {
-    var event = helpers.generateEvent(req.session.user_id, req.body.eventType);
-    sendEvent(event);
+    if(req.body.eventType === 'trip') {
+      var events = helpers.generateTrip();
+      async.mapSeries(events, function(event, cb) {
+        sendEvent(helpers.generateEvent(req.session.user_id, event.type, event.location));
+        setTimeout(cb, event.delay);
+      });
+
+    } else {
+      var event = helpers.generateEvent(req.session.user_id, req.body.eventType);
+      sendEvent(event);
+    }
     res.json({success: true});
   } else {
     res.json({error: 'Not logged in'});

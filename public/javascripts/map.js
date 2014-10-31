@@ -13,7 +13,13 @@ var map = L.mapbox.map('map', 'automatic.h5kpm228', {maxZoom: 16}).setView([37.9
     , 'mil:on': 'MIL (check engine light) On'
     , 'mil:off': 'MIL (check engine light) Cleared'
     , 'hmi:interaction': 'Car Interaction'
-  };
+  },
+  markerLayer = L.mapbox.featureLayer().addTo(map),
+  icon = L.mapbox.marker.icon({
+    'marker-size': 'small',
+    'marker-color': '#38BE43',
+    'marker-symbol': 'circle'
+  });
 
 /* Web socket connection */
 var ws = new WebSocket((window.document.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.document.location.host);
@@ -27,34 +33,46 @@ ws.onmessage = function (msg) {
   var data = JSON.parse(msg.data)
     , date = new Date(parseInt(data.created_at))
     , title = events[data.type] || 'Unknown'
-    , description = [ moment(date).format('YYYY-MM-DD h:mm a') ];
+    , description = [];
 
-  console.log(data)
+
+  console.log(data);
+
+  description.push('<b>' + title + '</b>');
+
+  description.push('Date: <b>' + moment(date).format('MMM D, YYYY') + '</b>');
+  description.push('Time: <b>' + moment(date).format('h:mm a') + '</b>');
 
   if (data.vehicle) {
-    description.push(data.vehicle.display_name + ': ' + data.vehicle.year + ' ' + data.vehicle.make  + ' ' + data.vehicle.model);
+    description.push('Vehicle: <b>' + data.vehicle.year + ' ' + data.vehicle.make  + ' ' + data.vehicle.model + (data.vehicle.display_name ? ' (' + data.vehicle.display_name + ')' : '') + '</b>');
   }
 
 
   if (data.location) {
     if(data.location.accuracy_m) {
-      description.push('Accuracy: ' + data.location.accuracy_m.toFixed(0) + 'm');
+      description.push('Accuracy: <b>' + data.location.accuracy_m.toFixed(0) + 'm</b>');
     }
 
-    if (data.type == 'notification:speeding') {
-      description.push('Speed: ' + data.speed_mph + ' mph');
-    } else if (data.type == 'notification.hard_accel') {
-      description.push('Acceleration: ' + data.g_force + 'g');
-    } else if (data.type == 'notification.hard_brake') {
-      description.push('Deceleration: ' + data.g_force + 'g');
-    } else if (data.type == 'region:changed') {
+    if (data.type === 'trip:finished') {
+      description.push('Distance: <b>' + data.distance_mi + ' miles</b>');
+      description.push('Duration: <b>' + data.duration_min + ' minutes</b>');
+      description.push('Average MPG: <b>' + data.average_mpg + ' mpg</b>');
+      description.push('Start Location: <b>' + data.end_location + '</b>');
+      description.push('End Location: <b>' + data.start_location + '</b>');
+    } else if (data.type === 'notification:speeding') {
+      description.push('Speed: <b>' + data.speed_mph.toFixed() + ' mph</b>');
+    } else if (data.type === 'notification:hard_accel') {
+      description.push('Acceleration: <b>' + data.g_force.toFixed(3) + 'g</b>');
+    } else if (data.type === 'notification:hard_brake') {
+      description.push('Deceleration: <b>' + data.g_force.toFixed(3) + 'g</b>');
+    } else if (data.type === 'region:changed') {
       description.push(data.region.status + ' ' + data.region.name + ' (' + data.region.tag + ')');
-    } else if (data.type == 'mil:on' || data.type == 'mil:off') {
+    } else if (data.type === 'mil:on' || data.type == 'mil:off') {
       if(data.dtcs) {
-        data.dtcs.forEach(function(dtc) { description.push(dtc.code + ': ' + dtc.description); });
+        data.dtcs.forEach(function(dtc) { description.push('MIL: <b>' + dtc.code + ': ' + dtc.description + '</b>'); });
       }
-    } else if (data.type == 'hmi:interaction') {
-      description.push('Button: ' + data.button.id + ' ' + data.interaction);
+    } else if (data.type === 'hmi:interaction') {
+      description.push('Button: <b>' + data.button.id + ' ' + data.interaction + '</b>');
     }
 
     updateAlert(title, '');
@@ -82,23 +100,16 @@ setInterval(function() {
 
 
 function addMarker(lat, lon, title, description) {
-  L.mapbox.markerLayer({
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [lon, lat]
-    },
-    properties: {
-        title: title,
-        description: description,
-        'marker-size': 'small',
-        'marker-color': '#38BE43',
-        'marker-symbol': 'circle'
-    }
-  }).addTo(map);
+  var marker = L.marker([lat, lon], {
+    title: title,
+    icon: icon
+  });
+  marker.addTo(markerLayer);
   markers.push([lat, lon]);
   map.fitBounds(markers);
   map.panTo([lat, lon]);
+  marker.bindPopup(description, {className: 'driveEvent-popup'});
+  marker.openPopup();
 }
 
 function updateAlert(type, message) {
@@ -143,3 +154,7 @@ $('#simulate').submit(function(e) {
   });
   return false;
 });
+
+$('.btn-clear').click(function() {
+  markerLayer.clearLayers();
+})
