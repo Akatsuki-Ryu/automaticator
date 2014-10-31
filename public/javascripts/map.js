@@ -57,8 +57,8 @@ ws.onmessage = function (msg) {
       description.push('Distance: <b>' + data.distance_mi + ' miles</b>');
       description.push('Duration: <b>' + data.duration_min + ' minutes</b>');
       description.push('Average MPG: <b>' + data.average_mpg + ' mpg</b>');
-      description.push('Start Location: <b>' + data.end_location + '</b>');
-      description.push('End Location: <b>' + data.start_location + '</b>');
+      description.push('Start Location: <b>' + data.start_location + '</b>');
+      description.push('End Location: <b>' + data.end_location + '</b>');
     } else if (data.type === 'notification:speeding') {
       description.push('Speed: <b>' + data.speed_mph.toFixed() + ' mph</b>');
     } else if (data.type === 'notification:hard_accel') {
