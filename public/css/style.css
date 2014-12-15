@@ -1,5 +1,6 @@
 body {
-  background: #e1e1e1;
+  font-family: Avenir;
+  background: #e1e1e1 url(../images/climpek.png) 0 0;
 }
 
 #wrapper {
@@ -63,7 +64,7 @@ nav {
   display: block;
   margin: 0 auto;
   width: 250px;
-  margin-top:40px;
+  margin-top: 60px;
 }
 
 .sign-in .btn .automatic-logo {
@@ -191,4 +192,21 @@ nav {
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-top: 15px solid rgba(66, 73, 79, 0.88);
+}
+
+@media (min--moz-device-pixel-ratio: 1.5),
+(-o-min-device-pixel-ratio: 3/2),
+(-webkit-min-device-pixel-ratio: 1.5),
+(min-device-pixel-ratio: 1.5),
+(min-resolution: 144dpi),
+(min-resolution: 1.5dppx) {
+  body {
+    background-image: url(../images/climpek@2x.png);
+    background-size: 44px 44px;
+  }
+
+  .sign-in .btn .automatic-logo {
+    background-image: url(../images/automatic-logo@2x.png);
+    background-size: 22px 24px;
+  }
 }
