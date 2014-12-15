@@ -1,11 +1,25 @@
 {
   "name": "automaticator",
+  "version": "0.4.0",
   "description": "Automatic API Webhook Demo Application",
-  "version": "0.3.2",
   "author": {
     "name": "Brendan Nee",
-    "email": "brendan@automatic.com"
+    "email": "brendan@automatic.com",
+    "url": "http://www.automatic.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/automatic/automaticator.git"
+  },
+  "bugs": {
+    "url": "http://github.com/automatic/automaticator/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
   "dependencies": {
     "async": "~0.9.0",
     "body-parser": "~1.10.0",
@@ -26,13 +40,8 @@
     "ws": "~0.6.3"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.4.x"
+    "node": "0.10.x"
   },
-  "homepage": "https://automatic.com/developer",
-  "license": "MIT",
-  "private": false,
-  "repository": "https://github.com/automatic/automaticator",
   "scripts": {
     "start": "node ./bin/www",
     "postinstall": "node node_modules/.bin/gulp default"
