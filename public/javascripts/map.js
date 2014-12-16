@@ -1,6 +1,7 @@
 var map = L.mapbox.map('map', 'automatic.h5kpm228', {maxZoom: 16}).setView([37.9, -122.5], 10)
   , geocoder = L.mapbox.geocoder('automatic.h5kpm228')
   , markers = []
+  , previousMarker
   , bounds
   , events = {
       'ignition:on': 'Ignition On'
@@ -107,27 +108,30 @@ setInterval(function() {
 
 
 function addMarker(lat, lon, title, description) {
-  var marker = L.marker([lat, lon], {
-    title: title,
-    icon: iconLatest
-  });
+  var point = L.latLng(lat, lon),
+      marker = L.marker(point, {
+        title: title,
+        icon: iconLatest
+      });
+
   marker.addTo(markerLayer);
 
-  //change all existing markers to standard Icon
-  markers.forEach(function(marker) {
-    marker.setIcon(icon);
-  });
-
+  //change previous marker to standard Icon
+  if(previousMarker) {
+    previousMarker.setIcon(icon);
+  }
   markers.push(marker);
 
+  previousMarker = marker;
+
   if(bounds) {
-    bounds.extend(L.latLng(lat, lon));
+    bounds.extend(point);
   } else {
-    bounds = L.latLngBounds(L.latLng(lat, lon), L.latLng(lat, lon));
+    bounds = L.latLngBounds(point, point);
   }
 
+  map.panTo(point);
   map.fitBounds(bounds);
-  map.panTo([lat, lon]);
   marker.bindPopup(description, {className: 'driveEvent-popup'});
   marker.openPopup();
 }
