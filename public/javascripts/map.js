@@ -1,6 +1,7 @@
 var map = L.mapbox.map('map', 'automatic.h5kpm228', {maxZoom: 16}).setView([37.9, -122.5], 10)
   , geocoder = L.mapbox.geocoder('automatic.h5kpm228')
   , markers = []
+  , bounds
   , events = {
       'ignition:on': 'Ignition On'
     , 'ignition:off': 'Ignition Off'
@@ -19,7 +20,13 @@ var map = L.mapbox.map('map', 'automatic.h5kpm228', {maxZoom: 16}).setView([37.9
     'marker-size': 'small',
     'marker-color': '#38BE43',
     'marker-symbol': 'circle'
+  }),
+  iconLatest = L.mapbox.marker.icon({
+    'marker-size': 'small',
+    'marker-color': '#E74A4A',
+    'marker-symbol': 'circle'
   });
+
 
 /* Web socket connection */
 var ws = new WebSocket((window.document.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.document.location.host);
@@ -102,11 +109,24 @@ setInterval(function() {
 function addMarker(lat, lon, title, description) {
   var marker = L.marker([lat, lon], {
     title: title,
-    icon: icon
+    icon: iconLatest
   });
   marker.addTo(markerLayer);
-  markers.push([lat, lon]);
-  map.fitBounds(markers);
+
+  //change all existing markers to standard Icon
+  markers.forEach(function(marker) {
+    marker.setIcon(icon);
+  });
+
+  markers.push(marker);
+
+  if(bounds) {
+    bounds.extend(L.latLng(lat, lon));
+  } else {
+    bounds = L.latLngBounds(L.latLng(lat, lon), L.latLng(lat, lon));
+  }
+
+  map.fitBounds(bounds);
   map.panTo([lat, lon]);
   marker.bindPopup(description, {className: 'driveEvent-popup'});
   marker.openPopup();
