@@ -22,7 +22,7 @@ Copy the file `config-sample.json` to `config.json` and add your Automatic clien
 
 ### Run the app
 
-    gulp server
+    gulp develop
 
 ### View the app
 
@@ -32,7 +32,7 @@ Open `localhost:3000` in your browser.
 
 You can test locally as a logged in user, bypassing oAuth by including an `TOKEN` and `USER_ID` when running the app.
 
-    USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> gulp server
+    USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> gulp develop
 
 ## Deploying
 

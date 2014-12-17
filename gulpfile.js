@@ -1,24 +1,24 @@
 var gulp = require('gulp');
-var bower = require('gulp-bower');
-var server = require('gulp-express');
 
-gulp.task('default', function() {
-  return bower()
-    .pipe(gulp.dest('public/bower_components'));
+var plugins = require("gulp-load-plugins")({
+  pattern: ['gulp-*', 'gulp.*'],
+  replaceString: /\bgulp[\-.]/
 });
 
+gulp.task('lint', function () {
+  gulp.src('./**/*.js')
+  .pipe(plugins.jshint());
+});
 
-gulp.task('server', function () {
-    //start the server at the beginning of the task
-    gulp.start('default');
+gulp.task('bower', function() {
+  return plugins.bower()
+  .pipe(gulp.dest('public/bower_components'));
+});
 
-    server.run({
-        file: 'bin/www'
-    });
-
-    //restart the server when file changes
-    gulp.watch(['views/**/*.html'], [server.run]);
-    gulp.watch(['public/css/**/*.css'], server.notify);
-    gulp.watch(['public/images/**/*'], server.notify);
-    gulp.watch(['app.js', 'routes/**/*.js'], [server.run]);
+gulp.task('develop', function () {
+  plugins.nodemon({ script: 'bin/www', ext: 'html js', ignore: ['ignored.js'] })
+  .on('change', ['lint'])
+  .on('restart', function () {
+    console.log('restarted!');
+  });
 });
