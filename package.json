@@ -38,6 +38,7 @@
     "nconf": "~0.7.1",
     "request": "~2.51.0",
     "serve-favicon": "~2.1.7",
+    "simple-oauth2": "~0.2.x",
     "underscore": "~1.7.0",
     "ws": "~0.6.3"
   },

@@ -11,19 +11,17 @@ var store = new memoryStore();
 var db = require('./database');
 var helpers = require('./routes/helpers');
 var async = require('async');
-
 var nconf = require('nconf');
+
+nconf.env().argv();
+nconf.file('./config.json');
 
 var routes = require('./routes');
 var api = require('./routes/api');
-var oauth = require('./routes/oauth');
 
 var app = express();
 
 app.set('store', store);
-
-nconf.env().argv();
-nconf.file('./config.json');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
@@ -45,11 +43,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 if (app.get('env') !== 'development') {
   app.all('*', routes.force_https);
+} else {
+  app.all('*', routes.check_dev_token);
 }
+
 
 app.get('/', routes.index);
 app.get('/logs/', routes.logs);
 app.get('/logs/api/', api.logs);
+
 
 app.post('/simulate/api/', function(req, res) {
   if(req.session.user_id && req.body.eventType) {
@@ -70,9 +72,11 @@ app.post('/simulate/api/', function(req, res) {
   }
 });
 
-app.get('/authorize/', oauth.authorize);
-app.get('/logout/', oauth.logout);
-app.get('/redirect/', oauth.redirect);
+
+app.get('/authorize/', routes.authorize);
+app.get('/logout/', routes.logout);
+app.get('/redirect/', routes.redirect);
+
 
 app.post('/webhook/', function(req, res) {
   var wss = app.get('wss');
