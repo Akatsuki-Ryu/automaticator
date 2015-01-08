@@ -16,7 +16,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('develop', function () {
-  plugins.nodemon({ script: 'bin/www', ext: 'html js', ignore: ['ignored.js'] })
+  plugins.nodemon({ script: 'bin/www', ext: 'html js', ignore: ['public/javascripts/**'] })
   .on('change', ['lint'])
   .on('restart', function () {
     console.log('restarted!');
