@@ -1,29 +1,3 @@
-function randomLocation() {
-  //48.895, -123.901
-  //27.783968, -69.672700
-  return {
-    lat: (27.8 + Math.random() * 21),
-    lon: (-123.9 + Math.random() * 54.3),
-    accuracy_m: 10
-  };
-}
-
-
-function randomBrakeForce() {
-  return 0.3 + Math.random() * 0.4;
-}
-
-
-function randomAccelForce() {
-  return 0.3 + Math.random() * 0.3;
-}
-
-
-function randomSpeed() {
-  return 70 + Math.random() * 20;
-}
-
-
 exports.generateEvent = function(user_id, eventType, location) {
   var event = {
     user: {
@@ -206,3 +180,29 @@ exports.generateTrip = function() {
     },
   ]
 };
+
+
+function randomLocation() {
+  //48.895, -123.901
+  //27.783968, -69.672700
+  return {
+    lat: (27.8 + Math.random() * 21),
+    lon: (-123.9 + Math.random() * 54.3),
+    accuracy_m: 10
+  };
+}
+
+
+function randomBrakeForce() {
+  return 0.3 + Math.random() * 0.4;
+}
+
+
+function randomAccelForce() {
+  return 0.3 + Math.random() * 0.3;
+}
+
+
+function randomSpeed() {
+  return 70 + Math.random() * 20;
+}

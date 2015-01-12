@@ -8,9 +8,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var memoryStore = session.MemoryStore;
 var store = new memoryStore();
-var db = require('./database');
-var helpers = require('./routes/helpers');
-var async = require('async');
+var db = require('./libs/database');
 var nconf = require('nconf');
 
 nconf.env().argv();
@@ -18,6 +16,7 @@ nconf.file('./config.json');
 
 var routes = require('./routes');
 var api = require('./routes/api');
+var simulate = require('./routes/simulate');
 
 var app = express();
 
@@ -52,26 +51,7 @@ app.get('/', routes.index);
 app.get('/logs/', routes.logs);
 app.get('/logs/api/', api.logs);
 
-
-app.post('/simulate/api/', function(req, res) {
-  if(req.session.user_id && req.body.eventType) {
-    if(req.body.eventType === 'trip') {
-      var events = helpers.generateTrip();
-      async.mapSeries(events, function(event, cb) {
-        sendEvent(helpers.generateEvent(req.session.user_id, event.type, event.location));
-        setTimeout(cb, event.delay);
-      });
-
-    } else {
-      var event = helpers.generateEvent(req.session.user_id, req.body.eventType);
-      sendEvent(event);
-    }
-    res.json({success: true});
-  } else {
-    res.json({error: 'Not logged in'});
-  }
-});
-
+app.post('/simulate/api/', simulate.simulate);
 
 app.get('/authorize/', routes.authorize);
 app.get('/logout/', routes.logout);

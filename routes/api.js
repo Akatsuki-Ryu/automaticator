@@ -1,4 +1,4 @@
-var db = require('../database');
+var db = require('../libs/database');
 
 exports.logs = function(req, res) {
   if(req.session.user_id) {
