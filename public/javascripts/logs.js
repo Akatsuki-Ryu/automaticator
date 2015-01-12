@@ -1,7 +1,8 @@
-$(function() {
-  $.getJSON('/logs/api/', function(data) {
-    data.map(formatItem);
-  });
+// load logs
+showLoading();
+$.getJSON('/logs/api/', function(data) {
+  data.map(formatItem);
+  hideLoading();
 });
 
 function formatItem(item) {

@@ -6,6 +6,7 @@
 
   <title>Automaticator Logs: the Automatic API Demo App</title>
   <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="/bower_components/css-spinners/css/spinner/spinner.css" media="screen">
   <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
 
   <meta name="description" content="A Demo app using the Automatic API">
@@ -33,20 +34,29 @@
       </div>
     </nav>
     <div class="alert" id="alert"></div>
-    <table id="logs" class="table table-condensed table-striped">
-      <thead>
-        <th>Date</th>
-        <th>Event Type</th>
-        <th>Vehicle</th>
-        <th>Location</th>
-        <th>Data</th>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="content">
+      <table id="logs" class="table table-condensed table-striped table-logs">
+        <thead>
+          <th>Date</th>
+          <th>Event Type</th>
+          <th>Vehicle</th>
+          <th>Location</th>
+          <th>Data</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="loading">
+      <div class="text">
+        Loading logs
+      </div>
+      <div class="spinner"></div>
+    </div>
   </div>
 
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/moment/min/moment.min.js"></script>
+  <script src="/javascripts/helper.js"></script>
   <script src="/javascripts/logs.js"></script>
 
 </body>
