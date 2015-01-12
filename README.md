@@ -10,6 +10,12 @@ A version of this application is available at [https://automaticator.herokuapp.c
 
 ## Running
 
+### Install node and gulp
+
+    brew install node
+
+    npm install gulp -g
+
 ### Install required packages from NPM and Bower:
 
     npm install
